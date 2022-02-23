@@ -1,0 +1,29 @@
+{
+  "name": "@perrychi/editable-sortable-tree",
+  "version": "1.0.0",
+  "description": "A react editable and sortable tree component based on antd tree",
+  "main": "./index.js",
+  "keywords": ["editable", "sortable", "tree", "react", "editable-tree", "sortable-tree"],
+  "author": "Perry Chi",
+  "license": "ISC",
+  "scripts": {
+    "start": "rollup -c -w",
+    "build": "rollup -c"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "homepage": "",
+  "bugs": "",
+  "devDependencies": {
+    "@babel/core": "^7.17.5",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "@emotion/babel-preset-css-prop": "^11.2.0",
+    "node-sass": "^7.0.1",
+    "rollup": "^2.67.3",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-scss": "^3.0.0"
+  }
+}

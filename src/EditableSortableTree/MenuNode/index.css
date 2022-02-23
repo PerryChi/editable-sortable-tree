@@ -1,0 +1,16 @@
+.ant-input {
+  /* width: auto !important; */
+}
+.nodeText {
+  margin-right: 10px;
+}
+.nodeInput {
+  width: auto !important;
+  margin-right: 15px;
+}
+.saveNode {
+  /* margin: auto 5px; */
+}
+.iconGap {
+  margin-right: 10px;
+}
