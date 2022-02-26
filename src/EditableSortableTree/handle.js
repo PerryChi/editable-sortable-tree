@@ -84,7 +84,7 @@ export const sortHandler = (treeData) => {
 
 // 将一级路由节点添加到根路由节点的children里
 export const appendFirstLevelMenuToRootNodeChildren = (routesParam) => {
-  console.log('87 routesParam', routesParam);
+  // console.log('87 routesParam', routesParam);
   // const routesData = cloneDeep(trimNull(routesParam));
   // const rootNode = cloneDeep(routesData[0]) || {};
   // rootNode.name = 'rootNode';
@@ -103,7 +103,7 @@ export const appendFirstLevelMenuToRootNodeChildren = (routesParam) => {
       treeData[0].children.push(menuNode);
     }
   });
-  console.log('92 treeData', treeData);
+  // console.log('92 treeData', treeData);
   return treeData;
 };
 
@@ -112,9 +112,9 @@ export const addMenuCodeToMenuNode = (treeData = [], parentMenuKey = 'root') => 
   treeData.forEach((node) => {
     const { title, name, key, code, children } = node;
     // 新增节点是没有code的，则取它的key中的最后一级
-    const codeTemp = code ? code : key.slice(key.lastIndexOf('-') + 1);
+    const codeTemp = code ? code : key?.slice(key?.lastIndexOf('-') + 1);
     const keyTemp = code === 'root' ? 'root' : `${parentMenuKey}-${codeTemp}`;
-    console.log('107 node', node);
+    // console.log('107 node', node);
     node.name = title;
     node.key = keyTemp;
     node.title = title || name || code;
@@ -138,7 +138,7 @@ export const removeIframeNodeAndErrorPageNode = (routesParam) => {
 
 // 对后端返回的路由数据进行处理
 export const handleRouteData = (routesParam) => {
-  console.log('56 routesParam', routesParam);
+  // console.log('56 routesParam', routesParam);
   const routes = appendFirstLevelMenuToRootNodeChildren(routesParam);
   console.log('115 routes', routes);
   addMenuCodeToMenuNode(routes);
@@ -166,8 +166,8 @@ export const modifySomePropertyNameInTreeData = (routes = []) => {
 
 // 获取选中的菜单节点的 内容（菜单名称、code、组件路径等等）
 export const getCurrentMenuContent = (treeData, currentMenuSelected) => {
-  // console.log('89 routes', routes);
-  // console.log('90 currentMenuKey', currentMenuKey);
+  // console.log('89 treeData', treeData);
+  // console.log('90 currentMenuSelected', currentMenuSelected);
   let currentMenuContent = {};
   (function findMenuContent(routes, currentMenuKey) {
     routes.forEach((route) => {

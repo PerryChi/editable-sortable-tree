@@ -8,17 +8,17 @@ const MenuConfigForm = (props) => {
     form: { setFieldsValue },
     currentSelectNode = '',
     updateCurrNodeCode,
-    currentMenuContent = {},
+    currentNodeContent = {},
     treeNodeFormAPI,
     FormComponent,
   } = props;
-  // console.log('29 currentMenuContent', currentMenuContent);
+  // console.log('29 currentNodeContent', currentNodeContent);
   const {
     key = '',
     title: name = '',
     code = '',
     // ...rest
-  } = trimNull(currentMenuContent || {});
+  } = trimNull(currentNodeContent || {});
 
   // 表单项是否必须
   const requiredFlag = currentSelectNode && currentSelectNode !== 'root';
@@ -38,7 +38,7 @@ const MenuConfigForm = (props) => {
   }, [key, name, code]);
 
   // 节点组件
-  const formComponent = FormComponent ? FormComponent(currentMenuContent): '';
+  // const formComponent = FormComponent ? FormComponent(currentNodeContent): '';
 
   return (
     <>
@@ -67,7 +67,7 @@ const MenuConfigForm = (props) => {
         </Form.Item>
       </Form>
       {
-        formComponent
+        !!FormComponent && <FormComponent {...{ currentNodeContent,  treeNodeFormAPI}} />
       }
     </>
   );

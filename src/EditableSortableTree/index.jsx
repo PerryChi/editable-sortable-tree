@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Modal, Form } from 'antd';
+import { Form } from 'antd';
 import { cloneDeep, isEqual } from 'lodash';
 import DynamicMenuConfig from './DynamicMenuConfig.jsx';
 import { recurse, flatMenuData, modifySomePropertyNameInTreeData, handleRouteData } from './handle';
@@ -27,13 +27,14 @@ const EditableSortableTree = (props) => {
   }
 
   // console.log('23 props', props);
-  // console.log('24 getTreeData', getTreeData);
   // 更新Tree组件的数据源
-  const [menuTreeData, setMenuTreeData] = useState(handleRouteData(treeData));
+  // todo:
+  // const datahhh = handleRouteData(treeData);
+  const [menuTreeData, setMenuTreeData] = useState(treeData);
   const [menuTreeDataBeforeModified, setMenuTreeDataBeforeModified] = useState(treeData);
   
 
-  const [currentMenuContent, setCurrentMenuContent] = useState({});
+  const [currentNodeContent, setCurrentNodeContent] = useState({});
   // isTreeUnderEditing: Tree组件是否出在正在编辑的状态
   // 如果Tree组件处于正在编辑状态，则Tree组件的节点不可拖动
   const [isTreeUnderEditing, setTreeUnderEditing] = useState(false);
@@ -51,8 +52,8 @@ const EditableSortableTree = (props) => {
     setTreeUnderEditing,
     currentSelectNode,
     setCurrentSelectNode,
-    currentMenuContent,
-    setCurrentMenuContent,
+    currentNodeContent,
+    setCurrentNodeContent,
     editingNode,
     setEditingNode,
     menuTreeData,
@@ -76,9 +77,9 @@ const EditableSortableTree = (props) => {
     // 清除选中的菜单节点记录
     setCurrentSelectNode('');
   };
-  // let saveMenu = useRef();
+  
   // 获取数组的的属性JSON
-  if (getTreeData?.current) {
+  if (getTreeData&& ('current' in getTreeData)) {
     getTreeData.current = () => new Promise((resole) => {
       // 保存最终要返回的树数据
       let finalTreeData = null;

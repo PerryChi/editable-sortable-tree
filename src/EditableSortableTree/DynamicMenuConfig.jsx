@@ -18,8 +18,8 @@ const DynamicMenuConfig = (props) => {
     setTreeUnderEditing,
     currentSelectNode,
     setCurrentSelectNode,
-    currentMenuContent,
-    setCurrentMenuContent,
+    currentNodeContent,
+    setCurrentNodeContent,
     editingNode,
     setEditingNode,
     menuTreeData,
@@ -66,11 +66,11 @@ const DynamicMenuConfig = (props) => {
       setMenuTreeData(menuTreeDataTemp);
     }
     // 获取被点的节点的信息
-    const currentMenuContent = getCurrentMenuContent(menuTreeData, key);
-    console.log('81 currentMenuContent', currentMenuContent);
+    const currentNodeContent = getCurrentMenuContent(menuTreeData, key);
+    // console.log('81 currentNodeContent', currentNodeContent);
     // 将被点击的节点的信息回显到表单上
     // displayNodeInfoInForm(currentMenuContent, setFieldsValue);
-    setCurrentMenuContent(currentMenuContent);
+    setCurrentNodeContent(currentNodeContent);
   };
 
   // tree节点处于编辑状态时，点击了正在编辑的节点input框后的保存图标，则保存菜单名称
@@ -80,17 +80,17 @@ const DynamicMenuConfig = (props) => {
     // 从右侧表单中获取code
     const { code } = getFieldsValue();
     const menuTreeDataTemp = cloneDeep(menuTreeData);
-    // currentMenuContent是被保存了的菜单节点的信息
-    let currentMenuContent = null;
+    // currentNodeContent 是被保存了的菜单节点的信息
+    let currentNodeContent = null;
     recurse(menuTreeDataTemp, menuKey, (item, index, data) => {
       // 递归判断到菜单树数据中的这个menuKey，更新这个节点的菜单名称和code
       data[index] = { ...item, title: nodeText, name: nodeText, code };
-      currentMenuContent = { ...item, title: nodeText, name: nodeText };
+      currentNodeContent = { ...item, title: nodeText, name: nodeText };
     });
     console.log('67 menuTreeDataTemp', menuTreeDataTemp);
     // 点击了输入框后的保存图标，更新Tree组件数据源，并将该节点信息回显到表单
     setMenuTreeData(menuTreeDataTemp);
-    setCurrentMenuContent(currentMenuContent);
+    setCurrentNodeContent(currentNodeContent);
   };
 
   // 添加新的菜单节点
@@ -341,7 +341,7 @@ const DynamicMenuConfig = (props) => {
           <MenuConfigForm {...{
             form,
             currentSelectNode,
-            currentMenuContent,
+            currentNodeContent,
             updateCurrNodeCode,
             treeNodeFormAPI,
             FormComponent
