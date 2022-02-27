@@ -1,11 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import { Form } from 'antd';
 import { cloneDeep, isEqual } from 'lodash';
 import DynamicMenuConfig from './DynamicMenuConfig.jsx';
 import { recurse, flatMenuData, modifySomePropertyNameInTreeData, handleRouteData } from './handle';
 import { trimNull } from './utils';
-// import { routesByMock, menuMockData, requestData }  from './const';
-// import { routes }  from './routesMock';
 import 'antd/dist/antd.css';
 
 // TODO：要将文案英文化，并且文案可以配置
@@ -23,7 +21,7 @@ const EditableSortableTree = (props) => {
 
   if (!(typeof leftWidth === 'number' && leftWidth > 0 && leftWidth < 100)) {
     // console.log('33 props', 'leftWidth属性必须是(0, 100)之间的数字');
-    throw new Error('leftWidth属性必须是(0, 100)之间的数字');
+    throw new Error('Property leftWidth must be a number between (0, 100)');
   }
 
   // console.log('23 props', props);
@@ -289,7 +287,7 @@ const EditableSortableTree = (props) => {
           return resole(finalTreeData);
         })
         .catch((info) => {
-          console.log('校验失败：', info);
+          console.log('Right form validation failed: ', info);
         });
     });
   }

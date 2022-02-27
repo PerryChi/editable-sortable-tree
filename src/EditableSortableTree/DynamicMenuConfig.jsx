@@ -44,7 +44,7 @@ const DynamicMenuConfig = (props) => {
           resolve(true);
         })
         .catch(() => {
-          message.warning('请先配置完成当前选中的节点');
+          message.warning('Please configure the currently selected node first');
           resolve(false);
         });
     });
@@ -115,7 +115,7 @@ const DynamicMenuConfig = (props) => {
         // console.log('81 item', item);
         // 创建新节点对象
         const newMemuNode = {
-          title: '请编辑菜单名称',
+          title: 'new node',
           key: keyOfNewNode,
         };
         if (!(item.children && Array.isArray(item.children))) {
@@ -225,7 +225,7 @@ const DynamicMenuConfig = (props) => {
       (dropToGap && dragParentKey !== dropParentKey) ||
       (!dropToGap && dragParentKey !== dropKey)
     ) {
-      message.warning('只支持 同级菜单间拖拽排序');
+      message.warning('Only supports drag-and-drop sorting between menus at the same level');
       return;
     }
     const data = cloneDeep(menuTreeData);
@@ -294,7 +294,7 @@ const DynamicMenuConfig = (props) => {
         );
         // console.log('315 siblingsNodeKeys', siblingsNodeKeys);
         if (siblingsNodeKeys.includes(key)) {
-          message.warning('同层级下已有相同的code了，同层级节点code不能相同');
+          message.warning('The same nodeCode already exists in the same level, and the code of the nodes at the same level cannot be the same');
           setFieldsValue({ code: currentCodeInputValue || '' });
         } else {
           data[index] = {
