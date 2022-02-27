@@ -136,10 +136,10 @@ const MenuNode = (props) => {
           {!isTreeUnderEditing && <PlusOutlined className="iconGap" onClick={addNewMenuNode} />}
           {key.includes('-') && !isTreeUnderEditing && (
             <Popconfirm
-              title={`你确定删除“${nodeText}”菜单吗？`}
+              title={`Are you sure you want to delete menu "${nodeText}"?`}
               onConfirm={deleteMenuNode}
-              okText="确定"
-              cancelText="取消"
+              okText="yes"
+              cancelText="cancel"
             >
               {!isTreeUnderEditing && <DeleteOutlined />}
             </Popconfirm>

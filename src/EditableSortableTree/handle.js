@@ -87,18 +87,14 @@ export const appendFirstLevelMenuToRootNodeChildren = (routesParam) => {
   // console.log('87 routesParam', routesParam);
   // const routesData = cloneDeep(trimNull(routesParam));
   // const rootNode = cloneDeep(routesData[0]) || {};
-  // rootNode.name = 'rootNode';
-  // rootNode.key = 'root';
-  // rootNode.code = 'root';
-  // rootNode.routes = [];
   const rootNode = {
-    name: 'rootNode',
+    title: 'rootNode',
     key: 'root',
     code: 'root',
     children: [],
   };
   const treeData = [rootNode];
-  routesParam.forEach((menuNode = {}, index) => {
+  routesParam.forEach((menuNode = {}) => {
     if (Object.keys(menuNode).length) {
       treeData[0].children.push(menuNode);
     }
@@ -252,7 +248,7 @@ export const getNodeInfoFromFormAndUpdateTreeData = (...params) => {
     data[index] = {
       ...item,
       // 根路由的name和code恒定不变，不需要用表单数据更新
-      title: isRootNode ? '根节点' : name,
+      title: isRootNode ? 'rootNode' : name,
       code: isRootNode ? '/' : code,
       key,
       ...restNodeAttr

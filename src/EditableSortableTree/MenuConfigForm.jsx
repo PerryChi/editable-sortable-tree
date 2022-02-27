@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Form, Input } from 'antd';
 import { debounce, trimNull } from './utils';
 

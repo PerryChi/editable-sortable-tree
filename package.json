@@ -1,6 +1,6 @@
 {
   "name": "@perrychi/editable-sortable-tree",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "A react editable and sortable tree component based on antd tree",
   "main": "./index.js",
   "keywords": ["editable", "sortable", "tree", "react", "editable-tree", "sortable-tree"],
@@ -15,7 +15,9 @@
     "url": "https://github.com/PerryChi/editable-sortable-tree"
   },
   "homepage": "",
-  "bugs": "",
+  "bugs": {
+    "url": "https://github.com/PerryChi/editable-sortable-tree/issues"
+  },
   "devDependencies": {
     "@babel/core": "^7.17.5",
     "@babel/preset-env": "^7.16.11",

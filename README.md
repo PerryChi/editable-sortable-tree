@@ -8,7 +8,8 @@
     <source src="image/demo.mov">
   </video>
 </div> -->
-![demo demo](./image/interaction.png)
+
+![demo demo](./image/interaction.gif)
 
 ## 📦 Install
 
