@@ -138,8 +138,8 @@ const MenuNode = (props) => {
             <Popconfirm
               title={`Are you sure you want to delete menu "${nodeText}"?`}
               onConfirm={deleteMenuNode}
-              okText="yes"
-              cancelText="cancel"
+              okText="Yes"
+              cancelText="Cancel"
             >
               {!isTreeUnderEditing && <DeleteOutlined />}
             </Popconfirm>
