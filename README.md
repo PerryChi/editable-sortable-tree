@@ -20,7 +20,7 @@ yarn add @perrychi/editable-sortable-tree
 
 ```jsx
 import React from 'react';
-import EditableSortableTree from 'editable-sortable-tree';
+import EditableSortableTree from '@perrychi/editable-sortable-tree';
 
 const App = () => {
   const treeData = [
@@ -59,7 +59,7 @@ export default App;
 ```jsx
 import React, { useState, useEffect } from 'react';
 import { Form, Input, Radio } from 'antd';
-import { trimNull } from 'editable-sortable-tree';
+import { trimNull } from '@perrychi/editable-sortable-tree';
 
 const { TextArea } = Input;
 
@@ -219,7 +219,7 @@ export default App;
 ```
 > UI display
 
-![demo demo](./image/complexExample.png)
+![demo demo](./image/complex-example.png)
 ## Props
 
 | Prop            | Description                                                  | Type                                                    | Default |

@@ -1,6 +1,6 @@
 {
   "name": "@perrychi/editable-sortable-tree",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "A react editable and sortable tree component based on antd tree",
   "main": "./index.js",
   "keywords": ["editable", "sortable", "tree", "react", "editable-tree", "sortable-tree"],
