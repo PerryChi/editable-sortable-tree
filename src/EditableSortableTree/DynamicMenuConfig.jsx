@@ -130,8 +130,10 @@ const DynamicMenuConfig = (props) => {
       setExpandedMenuNode([...expandedMenuNode, menuKey]);
       // 自动选中刚才新建的节点
       setCurrentSelectNode(keyOfNewNode);
+      // todo：要注明这两个resetFields的区别
       // 新增节点后 清空右侧的表单内容
       resetFields();
+      treeNodeFormAPI?.resetFields();
     }
   };
 
@@ -175,6 +177,7 @@ const DynamicMenuConfig = (props) => {
       });
       // console.log('199 menuDataCopy', menuDataCopy);
       resetFields();
+      treeNodeFormAPI?.resetFields();
       setCurrentSelectNode('');
       setMenuTreeData(menuDataCopy);
     }

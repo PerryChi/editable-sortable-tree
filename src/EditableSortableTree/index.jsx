@@ -65,6 +65,7 @@ const EditableSortableTree = (props) => {
   const closeModal = () => {
     // 关闭弹框时清除表单数据
     form.resetFields();
+    treeNodeFormAPI?.resetFields();
     // 关闭弹窗后要将一些状态进行初始化，否则再次打开弹窗容易出问题
     // 将菜单树数据 重置为空数组
     setMenuTreeData([]);
