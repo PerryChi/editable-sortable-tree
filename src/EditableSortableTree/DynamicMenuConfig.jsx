@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Tree, message } from 'antd';
 import { cloneDeep } from 'lodash';
 import MenuNode from './MenuNode/index.jsx';
@@ -27,6 +27,7 @@ const DynamicMenuConfig = (props) => {
     treeNodeFormAPI,
     FormComponent,
     leftWidth,
+    onChange,
   } = props;
   // console.log('36 props', props);
   // todo: 暂时放在父组件里了，但是有违开闭原则，需要优化，当前被选中的菜单节点（是数组，Tree组件要用）
@@ -313,7 +314,12 @@ const DynamicMenuConfig = (props) => {
     setMenuTreeData(menuTreeDataTemp);
   };
 
-  console.log('342 menuTreeData', menuTreeData);
+  // console.log('342 menuTreeData', menuTreeData);
+  useEffect(() => {
+    if (onChange && typeof onChange === 'function') {
+      onChange(menuTreeData);
+    }
+  }, [onChange, menuTreeData]);
   return (
     <div className="menuConfig">
       <div className="menuTreeContainer"

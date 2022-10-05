@@ -136,9 +136,9 @@ export const removeIframeNodeAndErrorPageNode = (routesParam) => {
 export const handleRouteData = (routesParam) => {
   // console.log('56 routesParam', routesParam);
   const routes = appendFirstLevelMenuToRootNodeChildren(routesParam);
-  console.log('115 routes', routes);
+  // console.log('115 routes', routes);
   addMenuCodeToMenuNode(routes);
-  removeIframeNodeAndErrorPageNode(routes);
+  // removeIframeNodeAndErrorPageNode(routes);
   const finalTreeData = sortHandle(routes);
   // console.log('138', finalTreeData);
   return finalTreeData;

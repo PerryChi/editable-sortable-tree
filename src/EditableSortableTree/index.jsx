@@ -11,11 +11,12 @@ import 'antd/dist/antd.css';
 // 修改命名：menu->node  path->code  route->children
 const EditableSortableTree = (props) => {
   const {
-    treeData = [],
+    treeData: treeDataTemp = [],
     treeNodeFormAPI,
     FormComponent,
     leftWidth = 40,
     getTreeData,
+    onChange,
     needClear,
   } = props;
 
@@ -25,9 +26,8 @@ const EditableSortableTree = (props) => {
   }
 
   // console.log('23 props', props);
-  // 更新Tree组件的数据源
-  // todo:
-  // const datahhh = handleRouteData(treeData);
+  // 对菜单树数据，做一些处理
+  const treeData = handleRouteData(treeDataTemp);
   const [menuTreeData, setMenuTreeData] = useState(treeData);
   const [menuTreeDataBeforeModified, setMenuTreeDataBeforeModified] = useState(treeData);
   
@@ -59,6 +59,7 @@ const EditableSortableTree = (props) => {
     treeNodeFormAPI,
     FormComponent,
     leftWidth,
+    onChange,
   };
 
   // 点击了弹框的取消按钮，初始化一些状态
@@ -78,18 +79,18 @@ const EditableSortableTree = (props) => {
   };
   
   // 获取数组的的属性JSON
-  if (getTreeData&& ('current' in getTreeData)) {
+  if (getTreeData && ('current' in getTreeData)) {
     getTreeData.current = () => new Promise((resole) => {
       // 保存最终要返回的树数据
       let finalTreeData = null;
       form
         .validateFields()
         .then((formData) => {
-          console.log('61 formData', formData);
+          // console.log('61 formData', formData);
           // currentSelectNode 是当前树组件中选中的节点
           // console.log('62 currentSelectNode', currentSelectNode);
           const { name: title = '' } = formData;
-          console.log('83 menuTreeData', menuTreeData);
+          // console.log('83 menuTreeData', menuTreeData);
           // 最后提交时，将表单数据添加到对应的tree数据节点中
           recurse(menuTreeData, currentSelectNode, (item, index, data) => {
             data[index] = { ...item, ...formData, key: currentSelectNode, title };
@@ -97,15 +98,15 @@ const EditableSortableTree = (props) => {
   
           // 将老、新菜单的多层树形JSON 转成 一层的List结构
           const oldMenuList = flatMenuData(cloneDeep(menuTreeDataBeforeModified));
-          console.log('80 oldMenuList', oldMenuList);
+          // console.log('80 oldMenuList', oldMenuList);
           // 将当前编辑后的菜单数据深拷贝一份
-          console.log('70 menuTreeData', menuTreeData);
+          // console.log('70 menuTreeData', menuTreeData);
           // todo: 排查lodash 深拷贝函数有问题
           const newMenuData = JSON.parse(JSON.stringify(menuTreeData));
-          console.log('72 newMenuData', newMenuData);
+          // console.log('72 newMenuData', newMenuData);
           // addMenuCodeToMenuNode(newMenuData);
           const newMenuList = flatMenuData(newMenuData);
-          console.log('88 newMenuList', newMenuList);
+          // console.log('88 newMenuList', newMenuList);
           // 老菜单的id列表(有menuId的节点是从后端返来的)
           const oldMenuIdList = oldMenuList
             .filter((menu) => !!menu.menuId)
@@ -113,8 +114,8 @@ const EditableSortableTree = (props) => {
           const newMenuIdList = newMenuList
             .filter((menu) => !!menu.menuId)
             .map(({ menuId }) => menuId);
-          console.log('46 oldMenuIdList', oldMenuIdList);
-          console.log('47 newMenuIdList', newMenuIdList);
+          // console.log('46 oldMenuIdList', oldMenuIdList);
+          // console.log('47 newMenuIdList', newMenuIdList);
           // 新的菜单列表中，如果菜单节点没有menuId，说明是新增的节点
           const addedMenuIdList = newMenuList.filter((menu) => !menu.menuId);
           // 被删除的菜单的id列表
@@ -134,7 +135,7 @@ const EditableSortableTree = (props) => {
             }
           });
           // console.log('59 add', addedMenuList);
-          console.log('60 intersectionMenuIdList', intersectionMenuIdList);
+          // console.log('60 intersectionMenuIdList', intersectionMenuIdList);
           // 老新交集部分中的 老菜单的id与该老菜单节点的映射关系
           const oldMenuMap = {};
           intersectionMenuIdList.forEach((intersectionMenuId) => {
@@ -155,8 +156,8 @@ const EditableSortableTree = (props) => {
               }
             });
           });
-          console.log('77 oldMenuMap', oldMenuMap);
-          console.log('78 newMenuMap', newMenuMap);
+          // console.log('77 oldMenuMap', oldMenuMap);
+          // console.log('78 newMenuMap', newMenuMap);
   
           try {
             // 对比老新菜单中交集的菜单每个是否被修改过
@@ -182,9 +183,9 @@ const EditableSortableTree = (props) => {
                     typeof currentNewMenu[key] !== 'object' &&
                     currentOldMenu[key] !== currentNewMenu[key]
                   ) {
-                    console.log('95 intersectionMenuId', intersectionMenuId);
-                    console.log('96 currentOldMenu', currentOldMenu[key]);
-                    console.log('97 currentNewMenu', currentNewMenu[key]);
+                    // console.log('95 intersectionMenuId', intersectionMenuId);
+                    // console.log('96 currentOldMenu', currentOldMenu[key]);
+                    // console.log('97 currentNewMenu', currentNewMenu[key]);
                     // 如果菜单节点中当前的字段是简单类型，但却不相等，则说明该节点被修改过了
                     isCurrentMenuModified = true;
                   } else {
@@ -192,7 +193,7 @@ const EditableSortableTree = (props) => {
                     isCurrentMenuModified = !isEqual(currentOldMenu[key], currentNewMenu[key]);
                   }
                   if (isCurrentMenuModified) {
-                    console.log('113 intersectionMenuId', intersectionMenuId);
+                    // console.log('113 intersectionMenuId', intersectionMenuId);
                     // 如果当前菜单节点被修改过了，则将改菜单的id加到被修改的菜单id的list中
                     modifiedMenuIdList.push(intersectionMenuId);
                   }
@@ -202,11 +203,11 @@ const EditableSortableTree = (props) => {
           } catch (error) {
             console.log('159 error', error);
           }
-          console.log('133 add', addedMenuIdList);
-          console.log('134 delete', deletedMenuIdList);
-          console.log('135 oldMenuMap', oldMenuMap);
-          console.log('136 newMenuMap', newMenuMap);
-          console.log('137 modifiedMenuIdList', modifiedMenuIdList);
+          // console.log('133 add', addedMenuIdList);
+          // console.log('134 delete', deletedMenuIdList);
+          // console.log('135 oldMenuMap', oldMenuMap);
+          // console.log('136 newMenuMap', newMenuMap);
+          // console.log('137 modifiedMenuIdList', modifiedMenuIdList);
           // 菜单节点id与该菜单节点的操作类型的映射关系
           const menuIdAndOperationMap = {};
           addedMenuIdList.forEach((menuId) => {
@@ -218,7 +219,7 @@ const EditableSortableTree = (props) => {
           modifiedMenuIdList.forEach((menuId) => {
             menuIdAndOperationMap[menuId] = 'modify';
           });
-          console.log('178 menuIdAndOperationMap', menuIdAndOperationMap);
+          // console.log('178 menuIdAndOperationMap', menuIdAndOperationMap);
           /**
            * 节点的operation标识暂时也其实没用到，可有可无，暂时保留相关逻辑，以备后需
            * 关于节点的operation标识：本意是前端带上这个操作的标识，是为了告诉后端每个节点的操作类型，方便后端处理
@@ -249,24 +250,24 @@ const EditableSortableTree = (props) => {
            */
           const finalMenuListDataToBackEnd = cloneDeep(oldMenuList);
           addedMenuIdList.forEach((addedMenuId) => {
-            console.log('154 addedMenuId', addedMenuId);
+            // console.log('154 addedMenuId', addedMenuId);
             // 将新增的节点添加进去
             newMenuData.forEach((menuNode) => {
               const { menuId } = menuNode;
               if (menuId === addedMenuId) {
-                console.log('158 addedMenuId', addedMenuId);
+                // console.log('158 addedMenuId', addedMenuId);
                 finalMenuListDataToBackEnd.push(menuNode);
               }
             });
           });
           // 为每个节点添加operation操作标识
           addOperationToEveryNode(finalMenuListDataToBackEnd);
-          console.log('246 finalMenuListDataToBackEnd', finalMenuListDataToBackEnd);
-          console.log('247 newMenuData', newMenuData);
+          // console.log('246 finalMenuListDataToBackEnd', finalMenuListDataToBackEnd);
+          // console.log('247 newMenuData', newMenuData);
           modifySomePropertyNameInTreeData(newMenuData);
           // 拿出根路由的子路由数组（里面都是一级菜单）
           const routeWithoutRootNode = cloneDeep(newMenuData[0].routes);
-          console.log('251 routeWithoutRootNode', routeWithoutRootNode);
+          // console.log('251 routeWithoutRootNode', routeWithoutRootNode);
           delete newMenuData[0].routes;
           // 将根路由 和 一级路由 都放在第一级
           const finalRouteData = [newMenuData[0], ...routeWithoutRootNode];
