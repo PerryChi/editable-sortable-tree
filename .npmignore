@@ -1,4 +1,5 @@
 src
+.git
 .gitignore
 rollup.config.js
 node_modules
