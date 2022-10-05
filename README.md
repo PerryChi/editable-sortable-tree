@@ -17,6 +17,7 @@ yarn add @perrychi/editable-sortable-tree
 ```
 
 > This component is based on antd. If antd is not installed in your project, please install antd first
+
 ```bash
 npm install antd --save
 ```
